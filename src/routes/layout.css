@@ -1,0 +1,228 @@
+@import 'tailwindcss';
+
+@theme {
+	--font-heading: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+	--font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+	--color-brand-50: #f1f8e9;
+	--color-brand-100: #dfefc9;
+	--color-brand-200: #c3e097;
+	--color-brand-300: #a1cf63;
+	--color-brand-400: #83c22f;
+	--color-brand-500: #5a9e15;
+	--color-brand-600: #4a8a0b;
+	--color-brand-700: #3e7a08;
+	--color-brand-800: #2c5608;
+	--color-brand-900: #1f3d05;
+
+	/* --------------------------------------------------------------------
+     Gold / lime accent  ->  bg-gold-500, text-gold-500 …
+     Sampled from ISO badge, rating badge, "BEST SELLER" tag, stat numbers
+     on the green band, "Get a Custom Quote" button.
+     -------------------------------------------------------------------- */
+	--color-gold-300: #f7f0a8;
+	--color-gold-400: #f5ea5c;
+	--color-gold-500: #f0e201; /* primary gold */
+	--color-gold-600: #d9cc10;
+
+	/* --------------------------------------------------------------------
+     Accent blue  ->  bg-accent-500 …
+     Sampled from "Fast Delivery" / "Competitive Pricing" / applications icons.
+     -------------------------------------------------------------------- */
+	--color-accent-400: #5b82e0;
+	--color-accent-500: #2f60d5;
+	--color-accent-600: #2650b8;
+
+	/* --------------------------------------------------------------------
+     Neutrals  ->  bg-ink, text-body, bg-dark, border-line …
+     -------------------------------------------------------------------- */
+	--color-ink: #1a1a1a; /* headings */
+	--color-body: #4b4b4b; /* paragraph text */
+	--color-muted: #8a8a8a; /* secondary/meta text */
+	--color-line: #e7e7e7; /* borders/dividers */
+	--color-surface: #ffffff;
+	--color-surface-alt: #f7f8f5; /* soft off-white section bg */
+
+	--color-dark-900: #151313; /* CTA band / footer-top black */
+	--color-dark-800: #221f1f; /* top bar */
+	--color-dark-700: #2c2828;
+
+	/* --------------------------------------------------------------------
+     Radii  ->  rounded-card, rounded-badge, rounded-pill
+     -------------------------------------------------------------------- */
+	--radius-badge: 8px;
+	--radius-card: 16px;
+	--radius-panel: 20px;
+	--radius-pill: 999px;
+
+	/* --------------------------------------------------------------------
+     Shadows  ->  shadow-card, shadow-float, shadow-badge, shadow-btn
+     -------------------------------------------------------------------- */
+	--shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.06);
+	--shadow-card: 0 8px 24px rgba(20, 30, 10, 0.08);
+	--shadow-float: 0 20px 45px rgba(20, 30, 10, 0.16);
+	--shadow-badge: 0 8px 20px rgba(240, 226, 1, 0.35);
+	--shadow-btn: 0 10px 24px rgba(74, 138, 11, 0.28);
+	--shadow-header: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+	/* --------------------------------------------------------------------
+     Motion  ->  ease-out-expo (used from JS/GSAP + CSS transitions)
+     -------------------------------------------------------------------- */
+	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+	--ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+
+	/* --------------------------------------------------------------------
+     Custom animations  ->  animate-float, animate-pulse-soft
+     -------------------------------------------------------------------- */
+	--animate-float: float 4s ease-in-out infinite;
+	--animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+	--animate-marquee: marquee 28s linear infinite;
+
+	--text-small: 0.65rem
+		/* --------------------------------------------------------------------
+     Container
+     -------------------------------------------------------------------- */
+		--container-max: 1320px;
+}
+
+/* ==========================================================================
+   Keyframes for the @animate-* tokens above
+   ========================================================================== */
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+
+@keyframes pulse-soft {
+	0%,
+	100% {
+		box-shadow: 0 0 0 0 rgba(74, 138, 11, 0.35);
+	}
+	50% {
+		box-shadow: 0 0 0 10px rgba(74, 138, 11, 0);
+	}
+}
+
+@keyframes marquee {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+@utility bg-gradient-hero {
+	background: linear-gradient(180deg, var(--color-brand-50) 0%, var(--color-surface) 65%);
+}
+
+@utility bg-gradient-brand {
+	background: linear-gradient(135deg, var(--color-brand-600) 0%, var(--color-brand-800) 100%);
+}
+
+@utility bg-gradient-brand-band {
+	background: linear-gradient(120deg, var(--color-brand-500) 0%, var(--color-brand-700) 100%);
+}
+
+@utility bg-gradient-dark {
+	background: linear-gradient(135deg, var(--color-dark-900) 0%, var(--color-dark-800) 100%);
+}
+
+@utility bg-gradient-placeholder {
+	background: linear-gradient(160deg, #e9ebe6 0%, #b9bdb2 100%);
+}
+
+@utility text-gradient-brand {
+	background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-700));
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+@layer base {
+	* {
+		box-sizing: border-box;
+	}
+
+	html {
+		scroll-behavior: smooth;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		font-family: var(--font-body);
+		color: var(--color-body);
+		background: var(--color-surface);
+		line-height: 1.6;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		overflow-x: hidden;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--font-heading);
+		color: var(--color-ink);
+		line-height: 1.15;
+		font-weight: 600;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	button {
+		font-family: inherit;
+		cursor: pointer;
+	}
+
+	img,
+	svg {
+		display: block;
+		max-width: 100%;
+	}
+
+	::selection {
+		background: var(--color-brand-500);
+		color: #fff;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-brand-600);
+		outline-offset: 2px;
+	}
+
+	.skip-link {
+		position: absolute;
+		left: -9999px;
+		top: 0;
+		background: var(--color-brand-600);
+		color: #fff;
+		padding: 0.75rem 1.25rem;
+		z-index: 999;
+		border-radius: 0 0 8px 0;
+	}
+
+	.skip-link:focus {
+		left: 0;
+	}
+}
+
+@layer utilities {
+	.control {
+		max-width: 1440px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 100%;
+	}
+}

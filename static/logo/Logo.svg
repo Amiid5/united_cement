@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 213.36 112.29">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #40930d;
+      }
+
+      .cls-2, .cls-3 {
+        font-family: Montserrat-Bold, Montserrat;
+        font-size: 23.07px;
+        font-variation-settings: 'wght' 700;
+        font-weight: 700;
+      }
+
+      .cls-4 {
+        fill: #ffe60f;
+      }
+
+      .cls-5 {
+        fill: none;
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+        stroke-width: 1.12px;
+      }
+    </style>
+  </defs>
+  <text class="cls-2" transform="translate(12.42 106.85)"><tspan x="0" y="0">UNITED</tspan></text>
+  <text class="cls-3" transform="translate(100.17 106.85)"><tspan x="0" y="0" xml:space="preserve"> CEMENT</tspan></text>
+  <g>
+    <g>
+      <path class="cls-1" d="M111.71,4.75h-12.98l-38.93,67.02,6.48,12.34h78.72l6.07-13.19L111.71,4.75ZM93.33,58.05l11.22-20.74,12.59,20.74h-23.82Z"/>
+      <polygon class="cls-4" points="151.07 70.92 145 84.11 66.28 84.11 98.74 27.73 104.55 37.31 93.33 58.05 86.29 71.03 151.07 70.92"/>
+    </g>
+    <g>
+      <path class="cls-5" d="M111.71,4.75h-12.98l-38.93,67.02,6.48,12.34h78.72l6.07-13.19L111.71,4.75ZM93.33,58.05l11.22-20.74,12.59,20.74h-23.82Z"/>
+      <polyline class="cls-5" points="98.74 4.75 130.12 58.05 117.14 58.05 104.55 37.31 98.74 27.73 66.28 84.11"/>
+      <polyline class="cls-5" points="104.55 37.31 93.33 58.05 86.29 71.03 151.07 70.92"/>
+      <line class="cls-5" x1="117.14" y1="58.05" x2="93.33" y2="58.05"/>
+    </g>
+  </g>
+</svg>
