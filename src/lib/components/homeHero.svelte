@@ -88,14 +88,14 @@
 						class="flex flex-col sm:flex-row gap-3 sm:gap-6 lg:gap-4 xl:gap-10 w-full sm:w-auto px-4 sm:px-0"
 					>
 						<a
-							href="/"
+							href="/products"
 							class="flex gap-2 bg-brand-500 items-center justify-center text-white py-3 rounded capitalize font-heading font-semibold px-6 whitespace-nowrap"
 						>
 							browse all <ArrowRight size={20} />
 						</a>
 
 						<a
-							href="/"
+							href="/contact"
 							class="flex gap-2 bg-gold-500 items-center justify-center py-3 rounded capitalize font-heading font-semibold px-6 whitespace-nowrap"
 						>
 							<Phone size={20} /> contact sales

@@ -110,7 +110,7 @@
 		</div>
 
 		<div class="flex gap-0.5">
-			{#each Array(testimonial.rating) as _}
+			{#each Array(testimonial.rating) as _, i (i)}
 				<Star class="text-amber-400 fill-amber-400" size={16} />
 			{/each}
 		</div>
@@ -139,20 +139,20 @@
 				{@render googleLogo()}
 				<span class="font-heading font-semibold text-[15px]">4.9</span>
 				<div class="flex gap-0.5">
-					{#each Array(5) as _}
+					{#each Array(5) as _, i (i)}
 						<Star class="text-amber-400 fill-amber-400" size={14} />
 					{/each}
 				</div>
 				<span class="text-gray-500 text-[13px]">from 120+ reviews</span>
 			</div>
 		</div>
-	</div>
 
-	<div class="marquee-wrap">
-		<div class="marquee-track">
-			{#each loopedTestimonials as testimonial, i}
-				{@render card(testimonial, i)}
-			{/each}
+		<div class="marquee-wrap">
+			<div class="marquee-track">
+				{#each loopedTestimonials as testimonial, i (i)}
+					{@render card(testimonial, i)}
+				{/each}
+			</div>
 		</div>
 	</div>
 </section>
