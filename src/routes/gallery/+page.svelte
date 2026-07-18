@@ -16,7 +16,7 @@
 	function photos(start: number, end: number, alt: string): Photo[] {
 		const list: Photo[] = [];
 		for (let i = start; i <= end; i++) {
-			list.push({ src: `/report/photo-${i}.jpg`, alt: `${alt} — photo ${i}` });
+			list.push({ src: `/report/image${i}.jpg`, alt: `${alt} — photo ${i}` });
 		}
 		return list;
 	}
@@ -171,7 +171,7 @@
 <section class="control mx-2 py-10 sm:py-12">
 	<div class="mx-2">
 		<div class="flex items-center gap-2 mb-10 overflow-x-auto pb-1">
-			{#each categories as cat}
+			{#each categories as cat, i (i)}
 				<button
 					onclick={() => (activeCategory = cat)}
 					class="shrink-0 px-4 py-2 rounded-lg text-[14px] font-heading font-semibold transition-colors {activeCategory ===
@@ -197,7 +197,7 @@
 					</div>
 
 					<div class="columns-2 sm:columns-3 lg:columns-5 gap-3 sm:gap-4">
-						{#each block.photos as photo}
+						{#each block.photos as photo, i (i)}
 							<button
 								onclick={() => openLightbox(photo.src, photo.alt)}
 								class="group relative w-full mb-3 sm:mb-4 rounded-xl overflow-hidden bg-gray-100 border border-black/8 block break-inside-avoid"
