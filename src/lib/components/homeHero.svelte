@@ -76,7 +76,7 @@
 					<h1
 						class="text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-6xl 2xl:text-7xl leading-tight lg:leading-[1.1] capitalize"
 					>
-						welcome to <span class="text-brand-500 font-heading"> united cement </span>
+						welcome to <span class="text-brand-500 font-heading"> united cement </span> company
 					</h1>
 
 					<p class="text-sm sm:text-base px-2 sm:px-0">
