@@ -63,7 +63,7 @@
 	--shadow-float: 0 20px 45px rgba(20, 30, 10, 0.16);
 	--shadow-badge: 0 8px 20px rgba(240, 226, 1, 0.35);
 	--shadow-btn: 0 10px 24px rgba(74, 138, 11, 0.28);
-	--shadow-header: 0 8px 24px rgba(0, 0, 0, 0.08);
+	--shadow-header: 8px 8px 24px rgba(0, 0, 0, 0.08), -8px -8px 24px rgba(0, 0, 0, 0.08);
 
 	/* --------------------------------------------------------------------
      Motion  ->  ease-out-expo (used from JS/GSAP + CSS transitions)
@@ -78,11 +78,12 @@
 	--animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
 	--animate-marquee: marquee 28s linear infinite;
 
-	--text-small: 0.65rem
-		/* --------------------------------------------------------------------
+	--text-small: 0.65rem;
+
+	/* --------------------------------------------------------------------
      Container
      -------------------------------------------------------------------- */
-		--container-max: 1320px;
+	--container-max: 1320px;
 }
 
 /* ==========================================================================
