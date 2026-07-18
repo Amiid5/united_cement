@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Icon as IconType } from '@lucide/svelte';
 	import { Award, Calendar, MapPin, Package } from '@lucide/svelte';
+	import { onDestroy, onMount } from 'svelte';
 
 	const stats = [
 		{ title: '15+', desc: 'Years in Business', icon: Calendar },
@@ -8,10 +9,33 @@
 		{ title: '500K+', desc: 'Tons Delivered', icon: Package },
 		{ title: '50+', desc: 'Regions Served', icon: MapPin }
 	];
+
+	let containerEl: HTMLElement;
+	let ctx: any;
+
+	onMount(() => {
+		(async () => {
+			const { gsap } = await import('gsap');
+
+			ctx = gsap.context(() => {
+				gsap.from('.stat-card', {
+					x: -40,
+					opacity: 0,
+					stagger: 0.2,
+					duration: 0.5,
+					ease: 'power3.out'
+				});
+			}, containerEl);
+		})();
+	});
+
+	onDestroy(() => {
+		ctx?.revert();
+	});
 </script>
 
 {#snippet card(title: string, desc: string, Icon: typeof IconType)}
-	<div class="flex items-center gap-4 px-4 py-6 sm:px-6">
+	<div class="stat-card flex items-center gap-4 px-4 py-6 sm:px-6">
 		<span class="shrink-0 w-11 h-11 rounded-xl bg-brand-500/10 flex items-center justify-center">
 			<Icon size={22} class="text-brand-500" />
 		</span>
@@ -22,11 +46,11 @@
 	</div>
 {/snippet}
 
-<div class="control mt-24">
+<div class="control mt-24" bind:this={containerEl}>
 	<div
 		class="grid grid-cols-1 mx-2 lg:grid-cols-4 bg-white border border-black/8 rounded-2xl shadow-sm divide-x divide-y lg:divide-y-0 divide-black/8"
 	>
-		{#each stats as stat}
+		{#each stats as stat, i (i)}
 			{@render card(stat.title, stat.desc, stat.icon)}
 		{/each}
 	</div>

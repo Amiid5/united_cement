@@ -1,68 +1,125 @@
-<script>
+<script lang="ts">
 	import { ArrowRight, Award, Phone, Truck } from '@lucide/svelte';
+	import { onDestroy, onMount } from 'svelte';
+
+	let ctx: any;
+	let leftEl: HTMLElement; // bag image
+	let rightEl: HTMLElement; // truck image
+	let middleEl: HTMLElement; // wrapper for text column
+
+	onMount(() => {
+		(async () => {
+			const { gsap } = await import('gsap');
+
+			ctx = gsap.context(() => {
+				const middleChildren = middleEl.children; // h1, p, div, div
+
+				const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+				tl.from(
+					middleChildren,
+					{
+						opacity: 0,
+						y: 20,
+						stagger: 0.15,
+						duration: 0.5
+					},
+					'start'
+				)
+					.from(
+						leftEl,
+						{
+							x: -80,
+							opacity: 0,
+							duration: 0.6
+						},
+						'start+=0.2'
+					)
+					.from(
+						rightEl,
+						{
+							x: 80,
+							opacity: 0,
+							duration: 0.6
+						},
+						'start+=0.2'
+					); // same position as left = they animate together
+			});
+		})();
+	});
+
+	onDestroy(() => ctx?.revert());
 </script>
 
-<section class="control px-3 sm:px-4 md:mt-10">
-	<div class="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 sm:gap-10 lg:gap-8 items-center">
-		<div class="flex flex-col gap-4 sm:gap-5">
-			<span
-				class="font-medium font-heading text-[12px] sm:text-[13px] md:text-[14px] text-brand-500 bg-brand-500/10 w-fit px-2.5 sm:px-3 py-1.5 rounded-full"
-			>
-				Trusted by 1,200+ contractors nationwide
-			</span>
+<section class=" relative">
+	<div class="left-decor"></div>
+	<div class="flex control gap-20 items-center">
+		<div bind:this={leftEl}>
+			<img src="SRC Bag.png" alt="" width="600" height="1080" />
+		</div>
 
-			<h1
-				class="font-bold text-3xl xs:text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading capitalize leading-[1.15] sm:leading-[1.1] lg:leading-[1.05]"
-			>
-				Strong foundations <span class="text-brand-500">start here</span>
+		<div class="max-w-[500px] w-full flex flex-col gap-6 items-start" bind:this={middleEl}>
+			<h1 class="text-8xl leading-[80px] capitalize -ml-6">
+				welcome to <span class="text-brand-500 font-heading"> united cement </span>
 			</h1>
 
-			<p
-				class="text-[14px] sm:text-[15px] md:text-[16px] font-body text-gray-600 max-w-lg leading-relaxed"
-			>
+			<p class="">
 				Premium quality cement for residential, commercial, and infrastructure projects. Lab-tested,
 				and delivered on time — every time.
 			</p>
 
-			<div class="flex flex-wrap items-center gap-2.5 sm:gap-3 md:gap-4 mt-1">
+			<div class="flex gap-10">
 				<a
 					href="/"
-					class="group bg-brand-500 w-full md:w-fit hover:bg-brand-600 text-white text-[13px] sm:text-[14px] font-semibold font-heading flex gap-2 justify-center md:items-center px-4 py-2.5 sm:px-5 sm:py-3 rounded-lg transition-colors"
+					class="flex gap-2 bg-brand-500 items-center text-white py-3 rounded capitalize font-heading font-semibold px-6"
 				>
-					Browse Products
-					<ArrowRight
-						strokeWidth={1.8}
-						size={16}
-						class="transition-transform group-hover:translate-x-0.5"
-					/>
+					browse all <ArrowRight size={20} />
 				</a>
 				<a
 					href="/"
-					class="flex gap-2 justify-center md:items-center w-full md:w-fit border-2 px-4 py-[9px] sm:px-5 sm:py-[10px] rounded-lg text-accent-500 border-accent-500 hover:bg-accent-500 hover:text-white font-heading font-semibold text-[13px] sm:text-[14px] transition-colors duration-300"
+					class="flex gap-2 bg-gold-500 items-center py-3 rounded capitalize font-heading font-semibold px-6"
 				>
-					<Phone strokeWidth={1.8} size={16} />
-					Contact Sales
+					<Phone /> contact sales
 				</a>
 			</div>
 
-			<div
-				class="flex flex-wrap gap-x-4 sm:gap-x-6 gap-y-2.5 sm:gap-y-3 items-center text-[13px] sm:text-[14px] font-body text-gray-700 mt-2 sm:mt-3"
-			>
-				<span class="flex gap-2 items-center">
-					<Award size={16} class="text-brand-500 shrink-0" />
+			<div class="flex gap-10">
+				<span class="flex gap-2">
+					<Award class="text-brand-500" />
 					Premium Quality Materials
 				</span>
-				<span class="flex gap-2 items-center">
-					<Truck size={16} class="text-accent-500 shrink-0" />
+
+				<span class="flex gap-2">
+					<Truck class="text-blue-500" />
 					Fast Nationwide Delivery
 				</span>
 			</div>
 		</div>
 
-		<div
-			class="relative w-full h-[220px] xs:h-[260px] sm:h-[320px] lg:h-[460px] rounded-xl sm:rounded-2xl overflow-hidden bg-gray-100"
-		>
-			<div class="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300"></div>
+		<div bind:this={rightEl}>
+			<img src="truck.jpeg" alt="" width="700" class="rounded-2xl" />
 		</div>
 	</div>
+	<div class="right-decor"></div>
 </section>
+
+<style>
+	.left-decor {
+		position: absolute;
+		width: 600px;
+		height: 600px;
+		top: -50px;
+		left: -100px;
+		background: #5a9e153c;
+		filter: blur(100px);
+	}
+	.right-decor {
+		position: absolute;
+		width: 600px;
+		height: 600px;
+		top: -50px;
+		right: -100px;
+		background: #5a9e151a;
+		filter: blur(100px);
+	}
+</style>
