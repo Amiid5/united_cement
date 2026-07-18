@@ -10,7 +10,8 @@
 	const branches = [
 		{ name: 'Mogadishu', tag: 'Main office' },
 		{ name: 'Hargeisa', tag: 'Branch' },
-		{ name: 'Boosaaso', tag: 'Branch' }
+		{ name: 'Boosaaso', tag: 'Branch' },
+		{ name: 'Berbera', tag: 'Branch' }
 	];
 
 	const socialLinks = [
@@ -70,7 +71,7 @@
 					</p>
 
 					<div class="flex gap-2 mt-1">
-						{#each socialLinks as social}
+						{#each socialLinks as social, i (i)}
 							<a
 								href={social.href}
 								aria-label={social.name}
@@ -92,7 +93,7 @@
 
 				<div class="flex flex-col gap-3">
 					<h3 class="font-bold text-[13px] tracking-wide text-gray-900">EXPLORE</h3>
-					{#each exploreLinks as link}
+					{#each exploreLinks as link, i (i)}
 						<a href={link.href} class="text-gray-600 text-[14px] hover:text-brand-600 w-fit">
 							{link.label}
 						</a>
@@ -101,7 +102,7 @@
 
 				<div class="flex flex-col gap-3">
 					<h3 class="font-bold text-[13px] tracking-wide text-gray-900">BRANCHES</h3>
-					{#each branches as b}
+					{#each branches as b, i (i)}
 						<div class="flex items-center gap-2 text-gray-600 text-[14px]">
 							<svg
 								width="14"

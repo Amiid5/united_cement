@@ -5,7 +5,7 @@ export interface Product {
 	category: 'cement' | 'steel';
 	title: string;
 	description: string;
-	price: number;
+
 	unit: string;
 	bagSize: string;
 }

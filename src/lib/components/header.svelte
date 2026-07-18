@@ -46,7 +46,7 @@
 	});
 </script>
 
-<header class="control sticky top-0 z-50" bind:this={headerEl}>
+<header class="control" bind:this={headerEl}>
 	<div
 		class="flex justify-between items-center gap-3 m-2 lg:mt-6 header-shadow bg-white px-3 sm:px-5 py-2 lg:py-3 rounded-card"
 	>

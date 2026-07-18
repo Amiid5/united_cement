@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { CircleDollarSign, type Icon as IconType, Package, Shield, Truck } from '@lucide/svelte';
+	import { onDestroy, onMount } from 'svelte';
 
 	const features = [
 		{
@@ -27,11 +28,59 @@
 			bg: 'bg-accent-500'
 		}
 	];
+
+	let ctx: any;
+	let headerEl: HTMLElement;
+	let gridEl: HTMLElement;
+
+	onMount(() => {
+		(async () => {
+			const { gsap } = await import('gsap');
+			const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+			gsap.registerPlugin(ScrollTrigger);
+
+			ctx = gsap.context(() => {
+				gsap.set(headerEl.children, { y: -30, opacity: 0 });
+				gsap.set(gridEl.children, { y: 40, opacity: 0, scale: 0.96 });
+
+				gsap.to(headerEl.children, {
+					y: 0,
+					opacity: 1,
+					duration: 1,
+					ease: 'power3.out',
+					stagger: 0.15,
+					scrollTrigger: {
+						trigger: headerEl,
+						start: 'top 80%',
+						once: true
+					}
+				});
+
+				gsap.to(gridEl.children, {
+					y: 0,
+					opacity: 1,
+					scale: 1,
+					duration: 0.9,
+					ease: 'power3.out',
+					stagger: 0.12,
+					scrollTrigger: {
+						trigger: gridEl,
+						start: 'top 80%',
+						once: true
+					}
+				});
+			});
+		})();
+
+		onDestroy(() => {
+			ctx?.revert();
+		});
+	});
 </script>
 
 {#snippet card(title: string, desc: string, Icon: typeof IconType, bgColor: string)}
 	<div
-		class="flex flex-col gap-3 bg-white border border-black/10 rounded-2xl hover:border-brand-500 hover:shadow-lg cursor-pointer hover:-translate-y-1 duration-300 transition-all p-6"
+		class="flex flex-col gap-3 bg-white border border-black/10 rounded-2xl hover:border-brand-500 hover:shadow-lg cursor-pointer duration-300 transition-shadow p-6"
 	>
 		<span
 			class="inline-flex items-center justify-center w-12 h-12 rounded-xl text-white shrink-0 {bgColor}"
@@ -45,7 +94,7 @@
 
 <section class="mt-24 control mx-2 flex flex-col gap-12 md:gap-16">
 	<div class="mx-2 flex flex-col gap-10">
-		<div class="flex flex-col items-center text-center gap-3 max-w-xl mx-auto">
+		<div bind:this={headerEl} class="flex flex-col items-center text-center gap-3 max-w-xl mx-auto">
 			<span
 				class="text-brand-500 font-heading font-semibold text-[13px] md:text-[14px] tracking-wide"
 			>
@@ -60,8 +109,8 @@
 			</p>
 		</div>
 
-		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-			{#each features as f}
+		<div bind:this={gridEl} class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+			{#each features as f, i (i)}
 				{@render card(f.title, f.desc, f.icon, f.bg)}
 			{/each}
 		</div>

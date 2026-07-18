@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { MapPin, Phone, MessageCircle, Mail, Building2 } from '@lucide/svelte';
+	import { onDestroy, onMount } from 'svelte';
 
 	const branches = [
 		{
@@ -27,11 +28,62 @@
 			email: ''
 		}
 	];
+
+	let ctx: any;
+	let headerEl: HTMLElement;
+	let cardEl: HTMLElement;
+
+	onMount(() => {
+		(async () => {
+			const { gsap } = await import('gsap');
+			const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+			gsap.registerPlugin(ScrollTrigger);
+
+			ctx = gsap.context(() => {
+				gsap.set(headerEl.children, { y: -40, opacity: 0 });
+				gsap.set(cardEl.children, { y: 40, opacity: 0, scale: 0.96 });
+
+				gsap.to(headerEl.children, {
+					y: 0,
+					opacity: 1,
+					duration: 1,
+					ease: 'power3.out',
+					stagger: 0.15,
+					scrollTrigger: {
+						trigger: headerEl,
+						start: 'top 80%',
+						once: true
+					}
+				});
+
+				gsap.to(cardEl.children, {
+					y: 0,
+					opacity: 1,
+					scale: 1,
+					duration: 0.9,
+					ease: 'power3.out',
+					stagger: 0.12,
+					scrollTrigger: {
+						trigger: cardEl,
+						start: 'top 80%',
+						once: true
+					}
+				});
+			});
+		})();
+
+		onDestroy(() => {
+			ctx?.revert();
+		});
+	});
 </script>
 
 <section class="control mx-2 py-16 sm:py-20">
 	<div class="mx-2">
-		<div class="flex flex-col items-center text-center gap-3 max-w-xl mx-auto mb-10 sm:mb-12">
+		<div
+			bind:this={headerEl}
+			class="flex flex-col items-center text-center gap-3 max-w-xl mx-auto mb-10 sm:mb-12"
+		>
 			<span
 				class="text-brand-500 font-heading font-semibold text-[13px] md:text-[14px] tracking-wide"
 			>
@@ -45,10 +97,10 @@
 			</p>
 		</div>
 
-		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-			{#each branches as b}
+		<div bind:this={cardEl} class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+			{#each branches as b, i (i)}
 				<div
-					class="flex flex-col gap-4 bg-white border border-black/10 rounded-2xl p-5 sm:p-6 hover:border-brand-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+					class="flex flex-col gap-4 bg-white border border-black/10 rounded-2xl p-5 sm:p-6 hover:border-brand-500 hover:shadow-lg transition-shadow duration-300"
 				>
 					<div class="flex items-center justify-between">
 						<span
@@ -73,9 +125,10 @@
 							<p>{b.address}</p>
 						</div>
 
-						{#each b.phones as phone}
+						{#each b.phones as phone, i (i)}
 							<div class="flex items-center gap-2">
 								<Phone size={15} class="text-brand-500 shrink-0" />
+
 								<a
 									href="tel:{phone.replace(/\s/g, '')}"
 									class="hover:text-brand-500 transition-colors"

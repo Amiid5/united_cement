@@ -8,19 +8,19 @@
 </script>
 
 <div
-	class="group bg-white border border-black/10 rounded-2xl overflow-hidden relative flex flex-col hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+	class="group bg-white border border-black/10 rounded-2xl overflow-hidden relative flex flex-col hover:shadow-lg transition-shadow duration-300"
 >
-	<div class="relative bg-gray-100 w-full h-[170px] overflow-hidden">
+	<div class="relative bg-gray-100 w-full h-40 sm:h-48 md:h-52 overflow-hidden shrink-0 p-4">
 		{#if item.image && !failed}
 			<img
 				src={item.image}
 				alt={item.title}
-				class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+				class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
 				onerror={() => (failed = true)}
 			/>
 		{:else}
 			<div
-				class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center"
+				class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center rounded-lg"
 			>
 				<span class="text-gray-400 text-[12px] font-heading font-medium capitalize">
 					{item.category}
@@ -43,7 +43,6 @@
 		</div>
 
 		<div class="flex justify-between items-center">
-			<p class="font-bold text-brand-500 font-heading text-[19px]">${item.price.toFixed(2)}</p>
 			<p class="font-medium font-heading text-[13px] text-gray-500">/ {item.unit}</p>
 		</div>
 

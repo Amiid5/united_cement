@@ -10,7 +10,6 @@
 </script>
 
 <HomeHero />
-
 <StatsSection />
 <FeaturedProducts />
 <Benifit />

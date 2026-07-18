@@ -70,13 +70,8 @@
 <div class="bg-gray-50 border-b border-black/8 -mt-20 mx-2">
 	<div class="control mx-2 py-16 sm:py-20 lg:py-24">
 		<div class="flex flex-col items-start gap-5 max-w-2xl">
-			<span
-				class="font-medium font-heading text-[12px] sm:text-[13px] text-brand-500 bg-brand-500/10 w-fit px-3 py-1.5 rounded-full"
-			>
-				About United Cement Company
-			</span>
 			<h1 class="text-3xl sm:text-5xl lg:text-6xl font-heading font-bold leading-[1.1]">
-				Building the foundations of <span class="text-brand-500">Somalia and Somaliland</span>
+				About <span class="text-brand-500">United Cement</span> Company
 			</h1>
 			<p class="text-[15px] sm:text-[16px] font-body text-gray-600 leading-relaxed">
 				United Cement Company (UCC) supplies reinforcement steel and premium cement to contractors
@@ -96,7 +91,7 @@
 				<div
 					class="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center"
 				>
-					<Ship size={40} class="text-gray-400" />
+					<img src="logo/LOGO-v1.svg" alt="" />
 				</div>
 			</div>
 
@@ -199,7 +194,7 @@
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mt-10">
-			{#each values as v}
+			{#each values as v, i (i)}
 				{@render valueCard(v.title, v.desc, v.icon, v.bg)}
 			{/each}
 		</div>
@@ -213,7 +208,7 @@
 		<div
 			class="grid grid-cols-2 lg:grid-cols-4 bg-white border border-black/8 rounded-2xl shadow-sm divide-x divide-y lg:divide-y-0 divide-black/8"
 		>
-			{#each stats as s}
+			{#each stats as s, i (i)}
 				<div class="flex flex-col items-center justify-center text-center gap-1 px-4 py-6 sm:py-8">
 					<span class="font-heading font-bold text-2xl sm:text-3xl text-brand-500">{s.value}</span>
 					<span class="font-body text-[13px] text-gray-500">{s.label}</span>
@@ -236,7 +231,7 @@
 			</div>
 
 			<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
-				{#each qualitySteps as step}
+				{#each qualitySteps as step, i (i)}
 					<div
 						class="flex items-center gap-4 bg-white border border-black/10 rounded-2xl p-5 sm:p-6"
 					>
