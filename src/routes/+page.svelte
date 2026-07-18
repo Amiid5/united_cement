@@ -10,7 +10,7 @@
 </script>
 
 <HomeHero />
-<!-- 
+
 <StatsSection />
 <FeaturedProducts />
 <Benifit />
@@ -18,4 +18,3 @@
 <Applications />
 <Testimonials />
 <CtaBanner />
- -->
