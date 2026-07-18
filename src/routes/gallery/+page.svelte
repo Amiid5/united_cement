@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { ChevronRight, X, ImageOff } from '@lucide/svelte';
+	import { SvelteSet } from 'svelte/reactivity';
+	import { onMount } from 'svelte';
 
 	interface Photo {
 		src: string;
@@ -128,7 +130,7 @@
 	let activeCategory = $state('All');
 	let lightboxSrc = $state<string | null>(null);
 	let lightboxAlt = $state('');
-	let failedImages = $state(new Set<string>());
+	let failedImages = new SvelteSet<string>();
 	let lightboxFailed = $state(false);
 
 	const filteredBlocks = $derived(
@@ -147,30 +149,100 @@
 
 	function markFailed(src: string) {
 		failedImages.add(src);
-		failedImages = new Set(failedImages);
+	}
+
+	let headerEl: HTMLElement;
+	let categoryEl: HTMLElement;
+
+	onMount(() => {
+		(async () => {
+			const { gsap } = await import('gsap');
+
+			gsap.set(headerEl.children, { opacity: 0, y: 24 });
+			gsap.set(categoryEl.children, { opacity: 0, y: 12 });
+
+			const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+			tl.to(headerEl.children, {
+				opacity: 1,
+				y: 0,
+				duration: 0.7,
+				stagger: 0.12
+			}).to(
+				categoryEl.children,
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.5,
+					stagger: 0.04
+				},
+				'-=0.3'
+			);
+		})();
+	});
+
+	// Svelte action: sets up a one-time ScrollTrigger reveal for a single
+	// gallery block's photos. Used as an action (not a shared context) so
+	// it correctly re-runs when a block re-mounts after category filtering,
+	// and cleans itself up via destroy() when the block is removed.
+	function revealBlock(node: HTMLElement) {
+		let trigger: any;
+
+		(async () => {
+			const { gsap } = await import('gsap');
+			const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+			gsap.registerPlugin(ScrollTrigger);
+
+			const photoEls = node.querySelectorAll('.gallery-photo');
+			gsap.set(photoEls, { opacity: 0, y: 24, scale: 0.97 });
+
+			trigger = ScrollTrigger.create({
+				trigger: node,
+				start: 'top 85%',
+				once: true,
+				onEnter: () => {
+					gsap.to(photoEls, {
+						opacity: 1,
+						y: 0,
+						scale: 1,
+						duration: 0.6,
+						ease: 'power3.out',
+						stagger: 0.05
+					});
+				}
+			});
+		})();
+
+		return {
+			destroy() {
+				trigger?.kill();
+			}
+		};
 	}
 </script>
 
 <div class="bg-gray-50 border-b border-black/8 mx-2">
 	<div class="control mx-2 py-10 sm:py-12">
-		<div class="flex items-center gap-1.5 text-[13px] text-gray-500 mb-4">
-			<a href="/" class="hover:text-brand-500 transition-colors">Home</a>
-			<ChevronRight size={14} />
-			<span class="text-gray-800">Gallery</span>
+		<div bind:this={headerEl} class="flex flex-col gap-4">
+			<div class="flex items-center gap-1.5 text-[13px] text-gray-500">
+				<a href="/" class="hover:text-brand-500 transition-colors">Home</a>
+				<ChevronRight size={14} />
+				<span class="text-gray-800">Gallery</span>
+			</div>
+
+			<h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold">Our operations</h1>
+
+			<p class="text-[14px] sm:text-[15px] font-body text-gray-600 max-w-2xl leading-relaxed">
+				United Cement Company (UCC) — operating entirely across Somalia and Somaliland. A look at
+				our ports, warehouses, transport, and quality control in action.
+			</p>
 		</div>
-
-		<h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold">Our operations</h1>
-
-		<p class="text-[14px] sm:text-[15px] font-body text-gray-600 max-w-2xl mt-3 leading-relaxed">
-			United Cement Company (UCC) — operating entirely across Somalia and Somaliland. A look at our
-			ports, warehouses, transport, and quality control in action.
-		</p>
 	</div>
 </div>
 
 <section class="control mx-2 py-10 sm:py-12">
 	<div class="mx-2">
-		<div class="flex items-center gap-2 mb-10 overflow-x-auto pb-1">
+		<div bind:this={categoryEl} class="flex items-center gap-2 mb-10 overflow-x-auto pb-1">
 			{#each categories as cat, i (i)}
 				<button
 					onclick={() => (activeCategory = cat)}
@@ -186,7 +258,7 @@
 
 		<div class="flex flex-col gap-12 sm:gap-14">
 			{#each filteredBlocks as block (block.id)}
-				<div class="flex flex-col gap-4">
+				<div class="flex flex-col gap-4" use:revealBlock>
 					<div class="flex items-center gap-3">
 						<span
 							class="w-8 h-8 rounded-lg bg-brand-500/10 text-brand-600 font-heading font-bold text-[13px] flex items-center justify-center shrink-0"
@@ -200,7 +272,7 @@
 						{#each block.photos as photo, i (i)}
 							<button
 								onclick={() => openLightbox(photo.src, photo.alt)}
-								class="group relative w-full mb-3 sm:mb-4 rounded-xl overflow-hidden bg-gray-100 border border-black/8 block break-inside-avoid"
+								class="gallery-photo group relative w-full mb-3 sm:mb-4 rounded-xl overflow-hidden bg-gray-100 border border-black/8 block break-inside-avoid"
 							>
 								{#if !failedImages.has(photo.src)}
 									<img
