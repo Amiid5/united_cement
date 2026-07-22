@@ -28,7 +28,7 @@ function emailShell(innerHtml: string): string {
 					<!-- Header -->
 					<tr>
 						<td style="background-color: ${BRAND_GREEN}; padding: 28px 32px;" align="center">
-							<img src="${LOGO_URL}" alt="United Cement" height="50" style="display:block; height: 36px; width: auto;" />
+							<img src="${LOGO_URL}" alt="United Cement"  style="display:block; height:50px; width: auto;" />
 						</td>
 					</tr>
 					<!-- Body -->
