@@ -1,7 +1,7 @@
 // TEMPORARY: using imgbb-hosted image for local testing since
 // united-cement.com isn't deployed yet. Swap back to the line below
 // once deployed: 'https://united-cement.com/logo/LOGO-v1.png'
-const LOGO_URL = 'https://ik.imagekit.io/gip0dsag6/united-cement/LOGO-v1.svg';
+const LOGO_URL = 'https://ik.imagekit.io/gip0dsag6/united-cement/w-logo.svg';
 const BRAND_GREEN = '#5a9e15';
 const SITE_URL = 'https://united-cement.com';
 
@@ -28,7 +28,7 @@ function emailShell(innerHtml: string): string {
 					<!-- Header -->
 					<tr>
 						<td style="background-color: ${BRAND_GREEN}; padding: 28px 32px;" align="center">
-							<img src="${LOGO_URL}" alt="United Cement" height="36" style="display:block; height: 36px; width: auto;" />
+							<img src="${LOGO_URL}" alt="United Cement" height="50" style="display:block; height: 36px; width: auto;" />
 						</td>
 					</tr>
 					<!-- Body -->
