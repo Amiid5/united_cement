@@ -41,7 +41,7 @@ function emailShell(innerHtml: string): string {
 					<tr>
 						<td style="padding: 20px 32px; background-color: #fafaf8; border-top: 1px solid #e7e7e7;" align="center">
 							<p style="margin: 0 0 4px; font-size: 12px; color: #8a8a8a; font-family: Arial, Helvetica, sans-serif;">
-								United Cement Company &middot; Mogadishu, Hargeisa, Boosaaso
+								United Cement Company &middot; Mogadishu, Hargeisa, Boosaaso,berbera
 							</p>
 							<p style="margin: 0; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">
 								<a href="${SITE_URL}" style="color: ${BRAND_GREEN}; text-decoration: none;">united-cement.com</a>
