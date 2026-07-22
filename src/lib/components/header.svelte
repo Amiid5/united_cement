@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { quoteModal } from '$lib/state/quoteModal.svelte';
 
@@ -44,9 +45,14 @@
 			document.body.style.overflow = '';
 		};
 	});
+
+	async function handleNavClick(link: string) {
+		isOpen = false;
+		await goto(link);
+	}
 </script>
 
-<header class="control" bind:this={headerEl}>
+<header class="control relative z-50" bind:this={headerEl}>
 	<div
 		class="flex justify-between items-center gap-3 m-2 lg:mt-6 header-shadow bg-white px-3 sm:px-5 py-2 lg:py-3 rounded-card"
 	>
@@ -101,8 +107,11 @@
 					{#each navData as item, i (i)}
 						<li>
 							<a
-								onclick={() => (isOpen = false)}
 								href={item.link}
+								onclick={(e) => {
+									e.preventDefault();
+									handleNavClick(item.link);
+								}}
 								class="capitalize font-semibold font-heading py-2.5 px-3 block rounded-badge transition-colors {active(
 									item.link
 								)

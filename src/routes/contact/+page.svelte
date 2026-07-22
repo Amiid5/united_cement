@@ -4,7 +4,82 @@
 	import ContactForm from '$lib/components/contact/ContactForm.svelte';
 	import ContactMap from '$lib/components/contact/ContactMap.svelte';
 	import ContactFaq from '$lib/components/contact/ContactFaq.svelte';
+	import { onMount } from 'svelte';
+
+	const siteUrl = 'https://united-cement.com';
+	const pageUrl = `${siteUrl}/contact`;
+	const title = 'Contact Us | United Cement';
+	const description =
+		'Get in touch with United Cement for bulk orders, quotes, and inquiries. Branches in Mogadishu, Hargeisa, and Boosaaso — reach us by phone, WhatsApp, or email.';
+	const shareImage = `${siteUrl}/og-image.jpg`;
+
+	onMount(() => {
+		const contactJson = {
+			'@context': 'https://schema.org',
+			'@type': 'ContactPage',
+			name: title,
+			description,
+			url: pageUrl,
+			mainEntity: {
+				'@type': 'Organization',
+				name: 'United Cement',
+				url: siteUrl,
+				logo: `${siteUrl}/logo/LOGO-v3.svg`,
+				contactPoint: [
+					{
+						'@type': 'ContactPoint',
+						contactType: 'sales',
+						telephone: '+252-61-554-6444',
+						areaServed: ['SO'],
+						availableLanguage: ['en', 'so', 'ar']
+					}
+				]
+			}
+		};
+
+		const breadcrumbJson = {
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+				{ '@type': 'ListItem', position: 2, name: 'Contact', item: pageUrl }
+			]
+		};
+
+		const els = [contactJson, breadcrumbJson].map((json) => {
+			const el = document.createElement('script');
+			el.type = 'application/ld+json';
+			el.textContent = JSON.stringify(json);
+			document.head.appendChild(el);
+			return el;
+		});
+
+		return () => {
+			els.forEach((el) => document.head.removeChild(el));
+		};
+	});
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="description" content={description} />
+	<meta name="robots" content="index, follow" />
+	<link rel="canonical" href={pageUrl} />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="United Cement" />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:url" content={pageUrl} />
+	<meta property="og:image" content={shareImage} />
+	<meta property="og:image:alt" content="Contact United Cement" />
+	<meta property="og:locale" content="en_US" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={shareImage} />
+</svelte:head>
 
 <ContactHeader />
 <ContactInfoCards />

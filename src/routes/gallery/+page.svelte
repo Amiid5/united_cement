@@ -127,6 +127,13 @@
 		'Warehouse'
 	];
 
+	const siteUrl = 'https://united-cement.com';
+	const pageUrl = `${siteUrl}/gallery`;
+	const title = 'Gallery — Our Operations | United Cement';
+	const description =
+		'A look at United Cement operations across Somalia and Somaliland — port handling, vessel discharge, warehousing, transport, and quality control in action.';
+	const shareImage = `${siteUrl}/report/image1.jpg`;
+
 	let activeCategory = $state('All');
 	let lightboxSrc = $state<string | null>(null);
 	let lightboxAlt = $state('');
@@ -179,6 +186,44 @@
 				'-=0.3'
 			);
 		})();
+
+		// Structured data: CollectionPage with a curated set of ImageObject
+		// entries, plus a BreadcrumbList matching the visible Home > Gallery
+		// trail above. Capped to 10 lead photos, not all 69 — keeps payload
+		// reasonable while still giving search engines real image context.
+		const collectionJson = {
+			'@context': 'https://schema.org',
+			'@type': 'CollectionPage',
+			name: title,
+			description,
+			url: pageUrl,
+			image: blocks.slice(0, 10).map((b) => ({
+				'@type': 'ImageObject',
+				contentUrl: `${siteUrl}${b.photos[0].src}`,
+				name: b.title
+			}))
+		};
+
+		const breadcrumbJson = {
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+				{ '@type': 'ListItem', position: 2, name: 'Gallery', item: pageUrl }
+			]
+		};
+
+		const els = [collectionJson, breadcrumbJson].map((json) => {
+			const el = document.createElement('script');
+			el.type = 'application/ld+json';
+			el.textContent = JSON.stringify(json);
+			document.head.appendChild(el);
+			return el;
+		});
+
+		return () => {
+			els.forEach((el) => document.head.removeChild(el));
+		};
 	});
 
 	// Svelte action: sets up a one-time ScrollTrigger reveal for a single
@@ -220,6 +265,27 @@
 		};
 	}
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="description" content={description} />
+	<meta name="robots" content="index, follow" />
+	<link rel="canonical" href={pageUrl} />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="United Cement" />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:url" content={pageUrl} />
+	<meta property="og:image" content={shareImage} />
+	<meta property="og:image:alt" content="United Cement operations gallery" />
+	<meta property="og:locale" content="en_US" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={shareImage} />
+</svelte:head>
 
 <div class="bg-gray-50 border-b border-black/8 mx-2">
 	<div class="control mx-2 py-10 sm:py-12">

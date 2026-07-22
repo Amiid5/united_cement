@@ -9,6 +9,7 @@
 		/>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#5a9e15" />
 
 		<!-- Primary SEO -->
 		<title>United Cement | Premium Cement & Steel Supplier</title>
@@ -22,7 +23,7 @@
 		/>
 		<meta name="author" content="United Cement" />
 		<meta name="robots" content="index, follow" />
-		<link rel="canonical" href="https://www.unitedcement.com/" />
+		<link rel="canonical" href="https://united-cement.com/" />
 
 		<!-- Open Graph / Facebook / LinkedIn -->
 		<meta property="og:type" content="website" />
@@ -32,8 +33,8 @@
 			property="og:description"
 			content="High-quality cement and steel for construction, industrial, and infrastructure projects. Reliable materials, fast delivery."
 		/>
-		<meta property="og:url" content="https://www.unitedcement.com/" />
-		<meta property="og:image" content="https://www.unitedcement.com/og-image.jpg" />
+		<meta property="og:url" content="https://united-cement.com/" />
+		<meta property="og:image" content="https://united-cement.com/og-image.jpg" />
 		<meta property="og:locale" content="en_US" />
 
 		<!-- Twitter Card -->
@@ -43,10 +44,11 @@
 			name="twitter:description"
 			content="High-quality cement and steel for construction, industrial, and infrastructure projects. Reliable materials, fast delivery."
 		/>
-		<meta name="twitter:image" content="https://www.unitedcement.com/og-image.jpg" />
+		<meta name="twitter:image" content="https://united-cement.com/og-image.jpg" />
 
-		<!-- Favicon -->
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<!-- Favicon handled dynamically in +layout.svelte via $lib/assets import -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
 
 		<!-- Structured data for company/organization -->
 		<script type="application/ld+json">
@@ -54,9 +56,26 @@
 				"@context": "https://schema.org",
 				"@type": "Organization",
 				"name": "United Cement",
-				"url": "https://www.unitedcement.com/",
-				"logo": "https://www.unitedcement.com/logo/LOGO-v3.svg",
+				"url": "https://united-cement.com/",
+				"logo": "https://united-cement.com/logo/LOGO-v3.svg",
 				"description": "United Cement supplies high-quality cement and steel for construction, industrial, and infrastructure projects.",
+				"email": "Gm@united-cement.com",
+				"telephone": "+252615546444",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "KM4",
+					"addressLocality": "Mogadishu",
+					"addressCountry": "SO"
+				},
+				"contactPoint": [
+					{
+						"@type": "ContactPoint",
+						"telephone": "+252615546444",
+						"contactType": "customer service",
+						"email": "Gm@united-cement.com",
+						"areaServed": "SO"
+					}
+				],
 				"sameAs": []
 			}
 		</script>

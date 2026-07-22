@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { quoteModal } from '$lib/state/quoteModal.svelte';
+	import { onMount } from 'svelte';
 	import {
 		Target,
 		Eye,
@@ -12,6 +13,13 @@
 		ClipboardCheck,
 		Tags
 	} from '@lucide/svelte';
+
+	const siteUrl = 'https://united-cement.com';
+	const pageUrl = `${siteUrl}/about`;
+	const title = 'About Us | United Cement — Cement & Steel Supplier';
+	const description =
+		'United Cement Company (UCC) supplies reinforcement steel and premium cement across Somalia and Somaliland — from port receiving to project delivery. Learn our story, mission, and quality process.';
+	const shareImage = `${siteUrl}/og-image.jpg`;
 
 	const values = [
 		{
@@ -64,7 +72,77 @@
 			desc: 'Products are packaged and labeled under the UCC brand for traceability.'
 		}
 	];
+
+	onMount(() => {
+		// Structured data: AboutPage tied to the Organization, plus a
+		// BreadcrumbList reflecting Home > About even though no visible
+		// breadcrumb UI exists on this page (search engines still benefit
+		// from the hierarchy signal regardless of on-page display).
+		const aboutJson = {
+			'@context': 'https://schema.org',
+			'@type': 'AboutPage',
+			name: title,
+			description,
+			url: pageUrl,
+			mainEntity: {
+				'@type': 'Organization',
+				name: 'United Cement',
+				url: siteUrl,
+				logo: `${siteUrl}/logo/LOGO-v3.svg`,
+				description:
+					'United Cement Company (UCC) supplies reinforcement steel and premium cement across Somalia and Somaliland.',
+				address: {
+					'@type': 'PostalAddress',
+					streetAddress: 'KM4',
+					addressLocality: 'Mogadishu',
+					addressCountry: 'SO'
+				}
+			}
+		};
+
+		const breadcrumbJson = {
+			'@context': 'https://schema.org',
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+				{ '@type': 'ListItem', position: 2, name: 'About', item: pageUrl }
+			]
+		};
+
+		const els = [aboutJson, breadcrumbJson].map((json) => {
+			const el = document.createElement('script');
+			el.type = 'application/ld+json';
+			el.textContent = JSON.stringify(json);
+			document.head.appendChild(el);
+			return el;
+		});
+
+		return () => {
+			els.forEach((el) => document.head.removeChild(el));
+		};
+	});
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="description" content={description} />
+	<meta name="robots" content="index, follow" />
+	<link rel="canonical" href={pageUrl} />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="United Cement" />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:url" content={pageUrl} />
+	<meta property="og:image" content={shareImage} />
+	<meta property="og:image:alt" content="United Cement — about our company" />
+	<meta property="og:locale" content="en_US" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={shareImage} />
+</svelte:head>
 
 <!-- 1. Hero -->
 <div class="bg-gray-50 border-b border-black/8 -mt-20 mx-2">
@@ -91,7 +169,7 @@
 				<div
 					class="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center"
 				>
-					<img src="logo/LOGO-v1.svg" alt="" />
+					<img src="logo/LOGO-v1.svg" alt="United Cement logo" />
 				</div>
 			</div>
 
@@ -167,7 +245,7 @@
 <!-- 4. Values -->
 {#snippet valueCard(title: string, desc: string, Icon: typeof Target, bgColor: string)}
 	<div
-		class="flex flex-col gap-3 bg-white border border-black/10 rounded-2xl hover:border-brand-500 hover:shadow-lg cursor-pointer hover:-translate-y-1 duration-300 transition-all p-6"
+		class="flex flex-col gap-3 bg-white border border-black/10 rounded-2xl hover:border-brand-500 hover:shadow-lg cursor-pointer transition-shadow duration-300 p-6"
 	>
 		<span
 			class="inline-flex items-center justify-center w-12 h-12 rounded-xl text-white shrink-0 {bgColor}"
