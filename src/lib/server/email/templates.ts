@@ -127,7 +127,7 @@ export function quoteCustomerEmail(data: {
 			</tr>
 		</table>
 		<p style="margin: 0; font-size: 13px; color: #8a8a8a; line-height: 1.6;">
-			Need something urgent? Call us directly at <strong style="color:#1a1a1a;">+252 61 554 6444</strong>.
+			Need something urgent? Call us directly at <strong style="color:#1a1a1a;">+252 61 011 6288</strong>.
 		</p>
 	`);
 }
@@ -170,7 +170,7 @@ export function contactCustomerEmail(data: { name: string }): string {
 			</tr>
 		</table>
 		<p style="margin: 0; font-size: 13px; color: #8a8a8a; line-height: 1.6;">
-			Prefer to talk now? Call us at <strong style="color:#1a1a1a;">+252 61 554 6444</strong>.
+			Prefer to talk now? Call us at <strong style="color:#1a1a1a;">+252 61 011 6288</strong>.
 		</p>
 	`);
 }

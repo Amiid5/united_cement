@@ -7,9 +7,9 @@
 			label: 'Main office',
 			name: 'Mogadishu',
 			address: 'KM4, Mogadishu, Somalia',
-			phones: ['+252 61 554 6444'],
-			whatsapp: '+254 70 419 1971',
-			email: 'Gm@united-cement.com'
+			phones: ['+252 61 011 6288'],
+			whatsapp: '+252 61 011 6288',
+			email: 'info@united-cement.com'
 		},
 		{
 			label: 'Branch two',

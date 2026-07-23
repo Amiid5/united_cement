@@ -47,7 +47,10 @@
 				"addressLocality": "Mogadishu",
 				"addressCountry": "SO"
 			},
-			"sameAs": []
+			"sameAs": [
+				"https://www.facebook.com/share/198k1sE7dK/?mibextid=wwXIfr",
+				"https://wa.me/252610116288"
+			]
 		}
 	</script>
 </svelte:head>
