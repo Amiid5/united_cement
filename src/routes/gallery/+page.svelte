@@ -129,9 +129,9 @@
 
 	const siteUrl = 'https://united-cement.com';
 	const pageUrl = `${siteUrl}/gallery`;
-	const title = 'Gallery — Our Operations | United Cement';
+	const title = 'Gallery — Our Operations | United Cement Company Somalia';
 	const description =
-		'A look at United Cement operations across Somalia and Somaliland — port handling, vessel discharge, warehousing, transport, and quality control in action.';
+		'See United Cement Company in action — port receiving, vessel discharge, warehousing, and quality control for cement and steel across Mogadishu, Hargeisa & Boosaaso, Somalia.';
 	const shareImage = `${siteUrl}/report/image1.jpg`;
 
 	let activeCategory = $state('All');
@@ -269,16 +269,20 @@
 <svelte:head>
 	<title>{title}</title>
 	<meta name="description" content={description} />
-	<meta name="robots" content="index, follow" />
+	<meta
+		name="keywords"
+		content="United Cement Company gallery, United Cement Somalia photos, cement warehouse Somalia, steel warehouse Somalia, port operations Somalia, cement supplier Mogadishu, cement supplier Hargeisa, cement supplier Boosaaso, quality control cement Somalia, cement bagging Somalia, TMT rebar warehouse Somalia, construction materials operations Somalia"
+	/>
+	<meta name="robots" content="noindex, nofollow" />
 	<link rel="canonical" href={pageUrl} />
 
 	<meta property="og:type" content="website" />
-	<meta property="og:site_name" content="United Cement" />
+	<meta property="og:site_name" content="United Cement Company" />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 	<meta property="og:url" content={pageUrl} />
 	<meta property="og:image" content={shareImage} />
-	<meta property="og:image:alt" content="United Cement operations gallery" />
+	<meta property="og:image:alt" content="United Cement Company operations gallery" />
 	<meta property="og:locale" content="en_US" />
 
 	<meta name="twitter:card" content="summary_large_image" />

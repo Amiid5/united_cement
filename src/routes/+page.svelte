@@ -49,8 +49,8 @@
 			"url": "https://united-cement.com/",
 			"logo": "https://united-cement.com/logo/LOGO-v3.svg",
 			"description": "United Cement Company supplies Ordinary Portland Cement (OPC), Sulphate Resistant Cement (SRC), and TMT steel reinforcement bars across Somalia, with branches in Mogadishu, Hargeisa, and Boosaaso.",
-			"email": "Gm@united-cement.com",
-			"telephone": "+252 61 011 6288",
+			"email": "info@united-cement.com",
+			"telephone": "+252610116288",
 			"address": {
 				"@type": "PostalAddress",
 				"streetAddress": "KM4",
@@ -66,9 +66,9 @@
 			"contactPoint": [
 				{
 					"@type": "ContactPoint",
-					"telephone": "+252 61 011 6288",
+					"telephone": "+252610116288",
 					"contactType": "customer service",
-					"email": "Gm@united-cement.com",
+					"email": "info@united-cement.com",
 					"areaServed": "SO"
 				}
 			],
