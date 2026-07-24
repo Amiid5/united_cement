@@ -8,9 +8,9 @@
 
 	const siteUrl = 'https://united-cement.com';
 	const pageUrl = `${siteUrl}/contact`;
-	const title = 'Contact Us | United Cement';
+	const title = 'Contact United Cement | Offices in Mogadishu, Hargeisa & Boosaaso';
 	const description =
-		'Get in touch with United Cement for bulk orders, quotes, and inquiries. Branches in Mogadishu, Hargeisa, and Boosaaso — reach us by phone, WhatsApp, or email.';
+		'Contact United Cement Company for bulk cement and steel rebar orders, quotes, and inquiries. Offices in Mogadishu, Hargeisa & Boosaaso, Somalia — reach us by phone, WhatsApp, or email.';
 	const shareImage = `${siteUrl}/og-image.jpg`;
 
 	onMount(() => {
@@ -22,14 +22,24 @@
 			url: pageUrl,
 			mainEntity: {
 				'@type': 'Organization',
-				name: 'United Cement',
+				name: 'United Cement Company',
+				alternateName: 'United Cement',
 				url: siteUrl,
 				logo: `${siteUrl}/logo/LOGO-v3.svg`,
+				email: 'info@united-cement.com',
+				telephone: '+252610116288',
+				areaServed: [
+					{ '@type': 'City', name: 'Mogadishu' },
+					{ '@type': 'City', name: 'Hargeisa' },
+					{ '@type': 'City', name: 'Boosaaso' },
+					{ '@type': 'Country', name: 'Somalia' }
+				],
 				contactPoint: [
 					{
 						'@type': 'ContactPoint',
 						contactType: 'sales',
-						telephone: '+252-61-554-6444',
+						telephone: '+252610116288',
+						email: 'info@united-cement.com',
 						areaServed: ['SO'],
 						availableLanguage: ['en', 'so', 'ar']
 					}
@@ -63,16 +73,20 @@
 <svelte:head>
 	<title>{title}</title>
 	<meta name="description" content={description} />
-	<meta name="robots" content="index, follow" />
+	<meta
+		name="keywords"
+		content="contact United Cement, United Cement Company contact, cement supplier Mogadishu, cement supplier Hargeisa, cement supplier Boosaaso, steel supplier Mogadishu, steel supplier Hargeisa, steel supplier Boosaaso, cement Mogadishu, steel Mogadishu, cement Hargeisa, steel Hargeisa, cement Boosaaso, steel Boosaaso, building materials Hargeisa, construction supplies Somaliland, construction supplies Puntland, cement company near me Somalia, United Cement phone number, United Cement WhatsApp"
+	/>
+	<meta name="robots" content="noindex, nofollow" />
 	<link rel="canonical" href={pageUrl} />
 
 	<meta property="og:type" content="website" />
-	<meta property="og:site_name" content="United Cement" />
+	<meta property="og:site_name" content="United Cement Company" />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 	<meta property="og:url" content={pageUrl} />
 	<meta property="og:image" content={shareImage} />
-	<meta property="og:image:alt" content="Contact United Cement" />
+	<meta property="og:image:alt" content="Contact United Cement Company" />
 	<meta property="og:locale" content="en_US" />
 
 	<meta name="twitter:card" content="summary_large_image" />

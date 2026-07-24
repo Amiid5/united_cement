@@ -16,9 +16,9 @@
 
 	const siteUrl = 'https://united-cement.com';
 	const pageUrl = `${siteUrl}/about`;
-	const title = 'About Us | United Cement — Cement & Steel Supplier';
+	const title = 'About United Cement Company | Cement & Steel Supplier in Somalia';
 	const description =
-		'United Cement Company (UCC) supplies reinforcement steel and premium cement across Somalia and Somaliland — from port receiving to project delivery. Learn our story, mission, and quality process.';
+		'United Cement Company (UCC) supplies TMT steel rebar and OPC/SRC cement across Mogadishu, Hargeisa & Boosaaso, Somalia — from port receiving to project delivery. Our story, mission, and quality process.';
 	const shareImage = `${siteUrl}/og-image.jpg`;
 
 	const values = [
@@ -86,17 +86,26 @@
 			url: pageUrl,
 			mainEntity: {
 				'@type': 'Organization',
-				name: 'United Cement',
+				name: 'United Cement Company',
+				alternateName: 'United Cement',
 				url: siteUrl,
 				logo: `${siteUrl}/logo/LOGO-v3.svg`,
 				description:
 					'United Cement Company (UCC) supplies reinforcement steel and premium cement across Somalia and Somaliland.',
+				email: 'info@united-cement.com',
+				telephone: '+252610116288',
 				address: {
 					'@type': 'PostalAddress',
 					streetAddress: 'KM4',
 					addressLocality: 'Mogadishu',
 					addressCountry: 'SO'
-				}
+				},
+				areaServed: [
+					{ '@type': 'City', name: 'Mogadishu' },
+					{ '@type': 'City', name: 'Hargeisa' },
+					{ '@type': 'City', name: 'Boosaaso' },
+					{ '@type': 'Country', name: 'Somalia' }
+				]
 			}
 		};
 
@@ -126,16 +135,20 @@
 <svelte:head>
 	<title>{title}</title>
 	<meta name="description" content={description} />
-	<meta name="robots" content="index, follow" />
+	<meta
+		name="keywords"
+		content="United Cement Company, United Cement, UCC Somalia, about United Cement, cement company Somalia, steel company Somalia, reliable cement supplier Somalia, reliable steel supplier Somalia, quality cement Somalia, ISO certified cement Somalia, port to project cement delivery, construction company supplier Somalia, cement and steel supplier Mogadishu Hargeisa Boosaaso, trusted cement supplier Somalia"
+	/>
+	<meta name="robots" content="noindex, nofollow" />
 	<link rel="canonical" href={pageUrl} />
 
 	<meta property="og:type" content="website" />
-	<meta property="og:site_name" content="United Cement" />
+	<meta property="og:site_name" content="United Cement Company" />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 	<meta property="og:url" content={pageUrl} />
 	<meta property="og:image" content={shareImage} />
-	<meta property="og:image:alt" content="United Cement — about our company" />
+	<meta property="og:image:alt" content="United Cement Company — about our company" />
 	<meta property="og:locale" content="en_US" />
 
 	<meta name="twitter:card" content="summary_large_image" />
@@ -169,7 +182,7 @@
 				<div
 					class="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center"
 				>
-					<img src="logo/LOGO-v1.svg" alt="United Cement logo" />
+					<img src="logo/LOGO-v1.svg" alt="United Cement Company logo" />
 				</div>
 			</div>
 
