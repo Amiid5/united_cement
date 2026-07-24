@@ -18,7 +18,7 @@
 		</div>
 
 		<a
-			href="https://www.google.com/maps/search/?api=1&query=KM4+Mogadishu+Somalia"
+			href="https://maps.app.goo.gl/WqBXAYj7L65fBnDN7?g_st=ic"
 			target="_blank"
 			rel="noopener noreferrer"
 			class="group flex items-center justify-center gap-2 border-2 border-accent-500 text-accent-500 hover:bg-accent-500 hover:text-white font-heading font-semibold text-[14px] px-4 py-2.5 rounded-lg transition-colors duration-300"
